@@ -6,17 +6,14 @@ using FinchAPI;
 namespace Project_FinchControl
 {
 
-    // **************************************************
-    //
-    // Title: Finch Control - Menu Starter
-    // Description: Starter solution with the helper methods,
-    //              opening and closing screens, and the menu
-    // Application Type: Console
-    // Author: Velis, John
-    // Dated Created: 1/22/2020
-    // Last Modified: 1/25/2020
-    //
-    // **************************************************
+    //************************************
+    //Title: Finch Control
+    //Application Type: Console For finch Controle
+    //Description: To Function As A Controle DiviceFor The Finch Robot.
+    //Author: Benjamin Ducheny
+    //Date Created: 10/1/2020
+    //Last Modified:10/6/2020
+    //*************************************
 
     class Program
     {
@@ -63,6 +60,7 @@ namespace Project_FinchControl
                 //
                 // get user menu choice
                 //
+                Console.WriteLine("\t--------------------------------");
                 Console.WriteLine("\ta) Connect Finch Robot");
                 Console.WriteLine("\tb) Talent Show");
                 Console.WriteLine("\tc) Data Recorder");
@@ -70,6 +68,7 @@ namespace Project_FinchControl
                 Console.WriteLine("\te) User Programming");
                 Console.WriteLine("\tf) Disconnect Finch Robot");
                 Console.WriteLine("\tq) Quit");
+                Console.WriteLine("\t--------------------------------");
                 Console.Write("\t\tEnter Choice:");
                 menuChoice = Console.ReadLine().ToLower();
 
@@ -87,15 +86,15 @@ namespace Project_FinchControl
                         break;
 
                     case "c":
-
+                        DisplayDataRecorderDisplayMenuScreen(finchRobot);
                         break;
 
                     case "d":
-
+                        AlarmSystemDisplayMenuScreen(finchRobot);
                         break;
 
                     case "e":
-
+                        UserProgrammingDisplayMenuScreen(finchRobot);
                         break;
 
                     case "f":
@@ -138,13 +137,16 @@ namespace Project_FinchControl
                 //
                 // get user menu choice
                 //
+                Console.WriteLine("\t--------------------------------");
                 Console.WriteLine("\ta) Light and Sound");
-                Console.WriteLine("\tb) Dance with me");
-                Console.WriteLine("\tc) ");
-                Console.WriteLine("\td) ");
+                Console.WriteLine("\tb) Full turn simulation");
+                Console.WriteLine("\tc) SingWithMe");
+                Console.WriteLine("\td) Mix It Up");
                 Console.WriteLine("\tq) Main Menu");
                 Console.Write("\t\tEnter Choice:");
+                Console.WriteLine("\t--------------------------------");
                 menuChoice = Console.ReadLine().ToLower();
+
 
                 //
                 // process user menu choice
@@ -152,19 +154,19 @@ namespace Project_FinchControl
                 switch (menuChoice)
                 {
                     case "a":
-                        DisplayLightAndSound(finchRobot);
+                        FunWithLights(finchRobot);
                         break;
 
                     case "b":
-                        DisplayDanceWithMe(finchRobot);
+                        SpinDance(finchRobot);
                         break;
 
                     case "c":
-
+                        SingWithMe(finchRobot);
                         break;
 
                     case "d":
-
+                        MixItUp(finchRobot);
                         break;
 
                     case "q":
@@ -179,17 +181,176 @@ namespace Project_FinchControl
                 }
 
             } while (!quitTalentShowMenu);
+
+        }
+        static void SingWithMe(Finch finchRobot)
+        {
+            DisplayScreenHeader("Sing a song with me");
+            Console.WriteLine("\tThe finch will now play the birthday song.");
+            for (int i = 0; i < 1; i++)
+            {
+                finchRobot.noteOn(784);
+                finchRobot.wait(500);
+
+                finchRobot.noteOn(880);
+                finchRobot.wait(500);
+
+                finchRobot.noteOn(784);
+                finchRobot.wait(500);
+
+                finchRobot.noteOn(1047);
+                finchRobot.wait(500);
+
+                finchRobot.noteOn(988);
+                finchRobot.wait(800);
+
+                finchRobot.noteOn(784);
+                finchRobot.wait(500);
+
+                finchRobot.noteOn(880);
+                finchRobot.wait(500);
+
+                finchRobot.noteOn(784);
+                finchRobot.wait(500);
+
+                finchRobot.noteOn(1200);
+                finchRobot.wait(500);
+
+                finchRobot.noteOn(1047);
+                finchRobot.wait(800);
+
+                finchRobot.noteOn(784);
+                finchRobot.wait(500);
+
+                finchRobot.noteOn(1500);
+                finchRobot.wait(500);
+
+                finchRobot.noteOn(1310);
+                finchRobot.wait(500);
+
+                finchRobot.noteOn(1047);
+                finchRobot.wait(500);
+
+                finchRobot.noteOn(988);
+                finchRobot.wait(500);
+
+                finchRobot.noteOn(880);
+                finchRobot.wait(1000);
+
+                finchRobot.noteOn(1400);
+                finchRobot.wait(500);
+
+                finchRobot.noteOn(1310);
+                finchRobot.wait(500);
+
+                finchRobot.noteOn(1047);
+                finchRobot.wait(500);
+
+                finchRobot.noteOn(1200);
+                finchRobot.wait(500);
+
+                finchRobot.noteOn(1047);
+                finchRobot.wait(1200);
+
+                finchRobot.noteOff();
+                finchRobot.wait(200);
+
+                DisplayContinuePrompt();
+            }
         }
 
-        static void DisplayDanceWithMe(Finch finchRobot)
+        static void MixItUp(Finch finchRobot)
         {
-            DisplayScreenHeader("Dance With me");
+            DisplayScreenHeader("Dance!");
+            Console.WriteLine("\tThe Finch robot will now dance.");
+
+            DisplayContinuePrompt();
+            Console.Clear();
+
+            finchRobot.setMotors(255, -255);
+
+                finchRobot.setLED(144, 111, 111);
+                finchRobot.noteOn(784);
+                finchRobot.wait(500);
+
+                finchRobot.noteOn(880);
+                finchRobot.wait(500);
+
+                finchRobot.noteOn(784);
+                finchRobot.wait(500);
+
+                finchRobot.noteOn(1047);
+                finchRobot.wait(500);
+
+                finchRobot.noteOn(988);
+                finchRobot.wait(800);
+                finchRobot.setLED(31, 255, 76);
+                finchRobot.noteOn(784);
+                finchRobot.wait(500);
+
+                finchRobot.noteOn(880);
+                finchRobot.wait(500);
+
+                finchRobot.noteOn(784);
+                finchRobot.wait(500);
+
+                finchRobot.noteOn(1200);
+                finchRobot.wait(500);
+
+                finchRobot.noteOn(1047);
+                finchRobot.wait(800);
+
+                finchRobot.noteOn(784);
+                finchRobot.wait(500);
+                finchRobot.setLED(156, 234, 77);
+                finchRobot.noteOn(1500);
+                finchRobot.wait(500);
+
+                finchRobot.noteOn(1310);
+                finchRobot.wait(500);
+
+                finchRobot.noteOn(1047);
+                finchRobot.wait(500);
+
+                finchRobot.noteOn(988);
+                finchRobot.wait(500);
+
+                finchRobot.noteOn(880);
+                finchRobot.wait(1000);
+
+                finchRobot.noteOn(1400);
+                finchRobot.wait(500);
+
+                finchRobot.noteOn(1310);
+                finchRobot.wait(500);
+                finchRobot.setLED(67, 114, 235);
+                finchRobot.noteOn(1047);
+                finchRobot.wait(500);
+
+                finchRobot.noteOn(1200);
+                finchRobot.wait(500);
+
+                finchRobot.noteOn(1047);
+                finchRobot.wait(1200);
+
+                finchRobot.noteOff();
+                finchRobot.wait(200);
+
+            finchRobot.setMotors(0, 0);
+            finchRobot.setLED(0, 0, 0);
+            DisplayContinuePrompt();
+
+        }
+
+        static void SpinDance(Finch finchRobot)
+        {
+            DisplayScreenHeader("Dance!");
 
             Console.WriteLine("\tThe Finch robot will now dance.");
             DisplayContinuePrompt();
 
             finchRobot.setMotors(255, -255);
-            finchRobot.wait(4000);
+            
             finchRobot.setMotors(0, 0);
 
             DisplayContinuePrompt();
@@ -201,11 +362,11 @@ namespace Project_FinchControl
         /// *****************************************************************
         /// </summary>
         /// <param name="finchRobot">finch robot object</param>
-        static void DisplayLightAndSound(Finch finchRobot)
+        static void FunWithLights(Finch finchRobot)
         {
             Console.CursorVisible = false;
 
-            DisplayScreenHeader("Light and Sound");
+            DisplayScreenHeader("A fun little ");
 
             Console.WriteLine("\tThe Finch robot will not show off its glowing talent!");
             DisplayContinuePrompt();
@@ -345,6 +506,41 @@ namespace Project_FinchControl
             Console.WriteLine();
             Console.WriteLine("\t\t" + headerText);
             Console.WriteLine();
+        }
+
+        static void DisplayDataRecorderDisplayMenuScreen(Finch finchrobot)
+        {
+            Console.Clear();
+            DisplayScreenHeader("Data Screen Recorder");
+            Console.WriteLine();
+            Console.WriteLine("\t\tThis module is under development");
+            Console.WriteLine();
+
+            DisplayContinuePrompt();
+        }
+
+        static void AlarmSystemDisplayMenuScreen(Finch finchrobot)
+        {
+            Console.Clear();
+            DisplayScreenHeader("Alarm System");
+            Console.Clear();
+            Console.WriteLine();
+            Console.WriteLine("\t\tThis module is under development");
+            Console.WriteLine();
+
+            DisplayContinuePrompt();
+        }
+
+        static void UserProgrammingDisplayMenuScreen(Finch finchrobot)
+        {
+            Console.Clear();
+            DisplayScreenHeader("User program");
+            Console.Clear();
+            Console.WriteLine();
+            Console.WriteLine("\t\tThis module is under development");
+            Console.WriteLine();
+
+            DisplayContinuePrompt();
         }
 
         #endregion
