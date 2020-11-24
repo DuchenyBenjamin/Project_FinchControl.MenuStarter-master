@@ -385,6 +385,9 @@ namespace Project_FinchControl
         #endregion
 
         #region DataRecorder
+        /// <summary>
+        /// Menu Screen
+        /// </summary>
         static void DataRecorderDisplayMenuScreen(Finch finchRobot)
         {
             string menuChoice;
@@ -446,7 +449,9 @@ namespace Project_FinchControl
                 }
             } while (!quitMenu);
         }
-
+        /// <summary>
+        /// Display temperatures
+        /// </summary>
         static void DataRecorderDisplayDataSet(double[] temperatures)
         {
             DisplayScreenHeader("Display Data");
@@ -488,11 +493,14 @@ namespace Project_FinchControl
             DataRecorderDisplayAverageAndSum(temperatures);
         }
 
+        /// <summary>
+        /// Get average and sum
+        /// </summary>
         static void DataRecorderDisplayAverageAndSum(double[] temperatures)
         {
             double sum = 0, avg = 0;
             //
-            //display table Average And Sum
+            //calculate Average And Sum
             //
 
             for (int i = 0; i < temperatures.Length; i++)
@@ -500,21 +508,34 @@ namespace Project_FinchControl
                 sum += temperatures[i];
             }
             avg = sum / temperatures.Length;
+
+            //
+            //display table Average And Sum
+            //
+
             Console.WriteLine("The Sum is : " + sum);
             Console.WriteLine("The Average is : " + avg);
         }
+
+        /// <summary>
+        /// This gets your array
+        /// </summary>
         static double[] DataRecorderDisplayGetDataSet(int numberOfDataPoints, double dataPointFrequency, Finch finchRobot)
         {
             double[] temperatures = new double[numberOfDataPoints];
             DisplayScreenHeader("Get Data");
-
+            //
+            //Display the Frequency and number of data points
+            //
             Console.WriteLine($"\tNumber Of Data Points: {numberOfDataPoints}");
             Console.WriteLine($"\tfrequency Of Data Points: {dataPointFrequency}");
             Console.WriteLine();
 
             Console.WriteLine("\tThe finch robot is ready to record temperature data. Press any key to begin.");
             Console.ReadKey();
-
+            //
+            //record temperture
+            //
             double temperture;
             int frequencyOfDataPointsMilliseconds;
             for (int index = 0; index < numberOfDataPoints; index++)
@@ -741,6 +762,7 @@ namespace Project_FinchControl
 
         private static void AlarmSystemDisplayElapsedTime(Finch finchRobot, int timeToMonitor, int secondsElapsed)
         {
+            //Display Elapsed Time
             Console.SetCursorPosition(25, 10);
             Console.WriteLine($"Time Elapsed: {0} seconds", secondsElapsed);
 
@@ -748,26 +770,29 @@ namespace Project_FinchControl
 
         static void DataRecorderDisplayCurrentSingleLightSensorValue(Finch finchRobot, string sensorsToMonitor)
         {
-
+            //Display the current light sensor value for a single value 
             switch (sensorsToMonitor)
             {
                 case "left":
                     Console.WriteLine($"\tLeft light sensor ambient value: {finchRobot.getLeftLightSensor()}");
+                    DisplayContinuePrompt();
                     break;
 
                 case "right":
                     Console.WriteLine($"\tRight light sensor ambient value: {finchRobot.getRightLightSensor()}");
+                    DisplayContinuePrompt();
                     break;
 
                 case "both":
-                    Console.WriteLine($"\tSensors ambient values: {finchRobot.getRightLightSensor() + finchRobot.getLeftLightSensor() / 2}");
+                    DataRecorderDisplayCurrentLightSensorValue(finchRobot);
+                    DisplayContinuePrompt();
                     break;
             }
-            DisplayContinuePrompt();
 
         }
         static void DataRecorderDisplayCurrentLightSensorValue(Finch finchRobot)
         {
+            //display all light sensor values
                 Console.SetCursorPosition(2, 8);
                 Console.WriteLine($"\tLeft light sensor ambient value: {finchRobot.getLeftLightSensor()}");
                 Console.WriteLine("");
@@ -781,6 +806,7 @@ namespace Project_FinchControl
             int minMaxThresholdValue,
             int timeToMonitor)
         {
+            //Display all settings
             Console.Clear();
             Console.WriteLine($"\tSensors To Monitor {sensorsToMonitor}");
             Console.WriteLine($"\tRange Type: {rangeType}");
@@ -801,7 +827,7 @@ namespace Project_FinchControl
             int currentLightSensorValue = 0;
 
             DisplayScreenHeader("Set Alarm");
-
+            
             Console.WriteLine($"\tSensors To Monitor {sensorsToMonitor}");
             Console.WriteLine($"\tRange Type: {rangeType}");
             Console.WriteLine($"\tMin/Max threshold value: {minMaxThresholdValue}");
@@ -811,7 +837,7 @@ namespace Project_FinchControl
             Console.WriteLine("\tPress any key to begin monitoring");
             Console.ReadKey();
             Console.WriteLine();
-
+            //Begin monitoring
             while ((secondsElapsed < timeToMonitor) && !thresholdExceeded)
             {
                 switch (rangeType)
@@ -879,6 +905,7 @@ namespace Project_FinchControl
 
             Console.WriteLine($"\tyour Time to monitor is:{TimeToMonitor}");
             Console.WriteLine();
+            //Question user and validate
             do
             {
                 Console.WriteLine("\tIs this the correct time?");
@@ -930,11 +957,12 @@ namespace Project_FinchControl
 
             Console.Write($"\tEnter the {rangeType} light sensor value: ");
             int.TryParse(Console.ReadLine(), out minMaxThresholdValue);
-
+            //ehco user respose
             Console.WriteLine($"\tYour {rangeType} light sensor value is {minMaxThresholdValue}.");
             Console.WriteLine();
             do
             {
+                //Question and validate
                 Console.WriteLine($"\tIs {minMaxThresholdValue} The correct light sensor value");
                 Console.WriteLine("\t--------------------------------");
                 Console.WriteLine("\tY) Yes");
@@ -975,7 +1003,7 @@ namespace Project_FinchControl
             string choice;
             bool exit = false;
             DisplayScreenHeader("Sensors to Monitor");
-
+            //question user on what sensor they want to monitor
             Console.Write("\tSensors to Monitor [left, right, both]:");
             sensorsToMonitor = Console.ReadLine().ToLower();
             Console.WriteLine();
@@ -985,6 +1013,7 @@ namespace Project_FinchControl
             Console.WriteLine();
             do
             {
+                //Question and validate
                 Console.WriteLine($"\tIs '{sensorsToMonitor}' the correct sensor?");
                 Console.WriteLine("\t--------------------------------");
                 Console.WriteLine("\tY) Yes");
@@ -1028,14 +1057,15 @@ namespace Project_FinchControl
 
             DisplayScreenHeader("Range Type");
 
-
+            //Gather range type
             Console.Write("\tRange Type [minimum, maximum]:");
             rangeType = Console.ReadLine();
-
+            //ehco range type
             Console.WriteLine($"\tyour range type is:{rangeType}.");
             Console.WriteLine();
             do
             {
+                //Question and validate
                 Console.WriteLine($"\tIs {rangeType} correct range?");
                 Console.WriteLine("\t--------------------------------");
                 Console.WriteLine("\tY) Yes");
